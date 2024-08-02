@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create Account</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f0f0f0;
+		}
+		
+		.container {
+			width: 300px;
+			background-color: #fff;
+			padding: 20px;
+			border: 1px solid #ddd;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+		
+		.input-field {
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 20px;
+			border: 1px solid #ccc;
+		}
+		
+		.input-field:focus {
+			border-color: #aaa;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+		
+		.button {
+			width: 100%;
+			padding: 10px;
+			background-color: #4CAF50;
+			color: #fff;
+			border: none;
+			border-radius: 10px;
+			cursor: pointer;
+		}
+		
+		.button:hover {
+			background-color: #3e8e41;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h2>Create Account</h2>
+		<form>
+			<input type="text" id="username" class="input-field" placeholder="Username">
+			<input type="email" id="email" class="input-field" placeholder="Email">
+			<input type="password" id="password" class="input-field" placeholder="Password">
+			<input type="password" id="confirm-password" class="input-field" placeholder="Confirm Password">
+			<p id="error-msg" style="color: red;"></p>
+			<button class="button">Create Account</button>
+		</form>
+	</div>
+	
+	<script>
+		const form = document.querySelector('form');
+		const errorMsg = document.querySelector('#error-msg');
+		
+		form.addEventListener('submit', (e) => {
+			e.preventDefault();
+			
+			const username = document.querySelector('#username').value;
+			const email = document.querySelector('#email').value;
+			const password = document.querySelector('#password').value;
+			const confirmPassword = document.querySelector('#confirm-password').value;
+			
+			if (username === '' || email === '' || password === '' || confirmPassword === '') {
+				errorMsg.textContent = 'Please fill in all fields.';
+			} else if (password !== confirmPassword) {
+				errorMsg.textContent = 'Passwords do not match.';
+			} else {
+				// Create account logic here
+				errorMsg.textContent = 'Account created successfully!';
+			}
+		});
+	</script>
+</body>
+</html>

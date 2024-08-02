@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora IMC</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .container {
+            display: flex;
+            flex-direction: row;
+        }
+        .formulario {
+            width: 50%;
+            padding: 20px;
+        }
+        .tabela-referencia {
+            width: 50%;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="formulario">
+            <h1>Calculadora IMC</h1>
+            <form id="imc-form">
+                <label for="peso">Peso (kg):</label>
+                <input type="number" id="peso" required>
+                <small>Ex: 70 (sem unidades)</small>
+                <label for="altura">Altura (cm):</label>
+                <input type="number" id="altura" required>
+                <small>Ex: 175 (em centímetros)</small>
+                <button id="calcular">Calcular IMC</button>
+            </form>
+            <div id="resultado">
+                <h2>Resultado:</h2>
+                <p id="imc-valor"></p>
+                <p id="imc-classificacao"></p>
+            </div>
+        </div>
+        <div class="tabela-referencia">
+            <h2>Tabela de Referência</h2>
+            <table>
+                <tr>
+                    <th>IMC</th>
+                    <th>Classificação</th>
+                </tr>
+                <tr>
+                    <td>Menos de 18,5</td>
+                    <td>Magreza</td>
+                </tr>
+                <tr>
+                    <td>18,5 a 24,9</td>
+                    <td>Normal</td>
+                </tr>
+                <tr>
+                    <td>25 a 29,9</td>
+                    <td>Sobrepeso</td>
+                </tr>
+                <tr>
+                    <td>30 a 34,9</td>
+                    <td>Obesidade grau 1</td>
+                </tr>
+                <tr>
+                    <td>35 a 39,9</td>
+                    <td>Obesidade grau 2</td>
+                </tr>
+                <tr>
+                    <td>Mais de 40</td>
+                    <td>Obesidade grau 3</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('imc-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const peso = document.getElementById('peso').value;
+            const altura = document.getElementById('altura').value;
+            const imc = calcularIMC(peso, altura);
+            const classificacao = getClassificacao(imc);
+            document.getElementById('imc-valor').innerText = `Seu IMC é: ${imc.toFixed(2)}`;
+            document.getElementById('imc-classificacao').innerText = `Sua classificação é: ${classificacao}`;
+        });
+
+        function calcularIMC(peso, altura) {
+            return peso / (altura / 100) ** 2;
+        }
+
+        function getClassificacao(imc) {
+            if (imc < 18.5) return 'Magreza';
+            if (imc < 25) return 'Normal';
+            if (imc < 30) return 'Sobrepeso';
+            if (imc < 35) return 'Obesidade grau 1';
+            if (imc < 40) return 'Obesidade grau 2';
+            return 'Obesidade grau 3';
+        }
+    </script>
+</body>
+</html>
